@@ -29,22 +29,39 @@
                 <th>Delete</th>
             </tr>
             <tr th:each="product : ${products}">
-                <td th:text="${product.id}"></td>
+                <td id='pid' th:text="${product.id}"></td>
                 <td th:text="${product.description}"></td>
                 <td th:text="${product.price}"></td>
                 <td th:text="${product.imageUrl}"></td>
-                <td><a th:href="${'/product/show/' + product.id}">View</a> </td>
-                <td><a th:href="${'/product/edit/' + product.id}">Edit</a> </td>
-                <td><a th:href="${'/product/delete/' + product.id}">Delete</a> </td>
+                <td><a href=# onclick="redirect('/product/show/' + $('pid'))" >View</a> </td>
+                <td><a href=# onclick="redirect('/product/edit/' + $('pid'))" >Edit</a> </td>
+                <td><a href=# onclick="redirect('/product/delete/' + $('pid'))" >Delete</a> </td>
             </tr>
         </table>
     </div>
     <div class="row">
         <div class="col-sm-3">
-            <a href="/product/new">New Product</a>
+            <a href=# onclick="redirect('/product/new')">New Product</a>
         </div>
     </div>
 </div>
 
 </body>
+<script>
+function getContextPath(){   
+    var pathName = document.location.pathname;   
+    var index = pathName.substr(1).indexOf("/");   
+    var result = pathName.substr(0,index+1);   
+    return result;   
+}  
+
+function redirect(str){
+	var url = getContextPath() + str;
+	location.href= url;
+}
+
+function $(id){
+	return document.getElementById(id).innerHTML;
+}
+</script>
 </html>
