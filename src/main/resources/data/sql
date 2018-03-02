@@ -1,0 +1,9 @@
+insert into root.users(username, userpwd) values('wang', 'wang');
+insert into root.users(username, userpwd) values('li', 'li');
+
+insert into root.weibo(create_date,weibo_text, user_id) values(current_timestamp, 'today is a good day', 1);
+insert into root.weibo(create_date,weibo_text, user_id) values(current_timestamp, '我来测试下这个支持不支持UTF-8', 2);
+ 
+ insert into root.comments(comment_date,comment_text,user_id,weibo_id) values(current_timestamp,'yep~, it is a good day', 2, 1);
+ insert into root.comments(comment_date,comment_text,user_id,weibo_id) values(current_timestamp,'自顶', 2, 2);
+  insert into root.comments(comment_date,comment_text,user_id,weibo_id) values(current_timestamp,'楼上,你抢我沙发', 1, 2);

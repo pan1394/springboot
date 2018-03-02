@@ -1,6 +1,7 @@
 package com.yilin.www.spingboot.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yilin.www.spingboot.aop.SystemLog;
+import com.yilin.www.spingboot.domain.User;
 import com.yilin.www.spingboot.dto.ResultModel;
+import com.yilin.www.spingboot.repository.UserRepository;
 import com.yilin.www.spingboot.service.AsyncService;
 import com.yilin.www.spingboot.service.DatabaseService;
 import com.yilin.www.spingboot.service.SpringELService;
@@ -72,4 +75,13 @@ public class TestController {
 		return new ResponseEntity<ResultModel>(body, HttpStatus.OK);
 	}
 	
+    @Autowired
+    private UserRepository userRepository;
+
+    @GetMapping("/searchUser/{username}")
+    public ResponseEntity<ResultModel> searchUser(@PathVariable("username") String username) {
+        List<User> result = this.userRepository.findByUsernameContaining(username);
+        return new ResponseEntity<ResultModel>(ResultModel.ok(result), HttpStatus.OK);
+    }
+
 }
